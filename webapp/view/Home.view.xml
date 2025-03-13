@@ -2,5 +2,8 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
+    	<VBox id="vbId01" class="sapUiSmallMargin">
+		<Text id="txtId01" text="{i18n>textPruebai18n}" />
+	</VBox>
     </Page>
 </mvc:View>
