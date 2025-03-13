@@ -4,6 +4,7 @@
     <Page id="page" title="{i18n>title}">
     	<VBox id="vbId01" class="sapUiSmallMargin">
 		<Text id="txtId01" text="{i18n>textPruebai18n}" />
+        <Button id="btnBuscar" text="{i18n>textBuscar}" press="onPress" />
 	</VBox>
     </Page>
 </mvc:View>
