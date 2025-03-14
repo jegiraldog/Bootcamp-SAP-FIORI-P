@@ -1,10 +1,36 @@
-<mvc:View controllerName="com.bootcamp.sapui5.freestyle.controller.Home"
+<mvc:View
+    controllerName="com.bootcamp.sapui5.freestyle.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-    	<VBox id="vbId01" class="sapUiSmallMargin">
-		<Text id="txtId01" text="{i18n>textPruebai18n}" />
-        <Button id="btnBuscar" text="{i18n>textBuscar}" press="onPress" />
-	</VBox>
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <VBox
+            id="vbId01"
+            class="sapUiSmallMargin"
+        >
+            <Text
+                id="txtId01"
+                text="{i18n>textPruebai18n}"
+            />
+            <Button
+                id="btnBuscar"
+                text="{i18n>textBuscar}"
+                press="onPress"
+            />
+        </VBox>
+
+        <VBox
+            id="vbId02"
+            class="sapUiSmallMargin"
+        >
+            <c:Fragment
+                fragmentName="com.bootcamp.sapui5.freestyle.view.fragments.ProductsTable"
+                type="XML"
+            />
+        </VBox>
     </Page>
 </mvc:View>
