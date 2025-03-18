@@ -7,6 +7,7 @@ sap.ui.define([
             const aRequestsPromises = [
                 new Promise(function (resolve, reject) {
                     oModel.read('/Products', {
+                        urlParameters: { '$sort': 'UnitsInStock desc'},
                         filters: oFilter,
                         success: resolve,
                         error: reject,

@@ -16,11 +16,14 @@
                 id="txtId01"
                 text="{i18n>textPruebai18n}"
             />
-            <Button
-                id="btnBuscar"
-                text="{i18n>textBuscar}"
-                press="onPress"
-            />
+            <Toolbar>
+                <Input value="{LocalModel>InputUser}" />
+                <Button
+                    id="btnBuscar"
+                    text="{i18n>textBuscar}"
+                    press="onPress"
+                />
+            </Toolbar>
         </VBox>
 
         <VBox
