@@ -9,6 +9,15 @@ sap.ui.define([
             this._oNorthwindModel = oNorthwindModel;
         },
 
+        setInitModelLocalData: function (oComponent) {
+            oComponent.setModel(new JSONModel({
+                valueInput: '',
+                selectedKey: '',
+                selectedKeyMulti: [],
+                selectedItem: []
+            }), "LocalDataModel");
+        },        
+
         getDataProducts: async function(oFilters) {
             //let oFilters = [];
             return HomeService.readProducts(this._oNorthwindModel, oFilters);

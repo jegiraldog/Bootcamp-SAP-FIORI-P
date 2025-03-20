@@ -2,27 +2,55 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "com/bootcamp/sapui5/freestyle/utils/HomeHelper",
     "sap/ui/model/FilterOperator",
-    "sap/ui/model/Filter"
+    "sap/ui/model/FilterType",
+    "sap/ui/model/Filter",
+    "com/bootcamp/sapui5/freestyle/model/formatter",
 
-], (Controller, HomeHelper, FilterOperator, Filter) => {
+], (Controller, HomeHelper, FilterOperator, FilterType, Filter, formatter) => {
     "use strict";
 
     return Controller.extend("com.bootcamp.sapui5.freestyle.controller.Home", {
+
+        formatter: formatter,
+
         onInit() {
             this.oRouter = this.getOwnerComponent().getRouter();
-
             //this.onSearch([]);
         },
 
         onPress: async function (oEvent) {
             let oFilter = [];
-            let sValue = this.byId("idLabel1").getValue();
+            //let sValue = this.byId("idLabel1").getValue();
+            //let sValueCombo = this.byId("comboboxID").getSelectedKey();
 
-            if(sValue){
-                oFilter = new Filter("ProductName", FilterOperator.Contains, sValue)
-            }           
+            let oTable = this.getView().byId("idProductsTable");
+            let oBinding = oTable.getBinding("items");
+
+            let values = this.getOwnerComponent().getModel("LocalDataModel").getData();
+
+            if(values.valueInput){
+                oFilter.push(new Filter("ProductName", FilterOperator.Contains, values.valueInput));
+            }      
             
-            this.onSearch(oFilter)
+            if(values.selectedKey){
+                oFilter.push(new Filter("CategoryID", FilterOperator.EQ, values.selectedKey));
+            }          
+
+            if(values.selectedKeyMulti.length > 0){
+
+                values.selectedKeyMulti.forEach(element => {
+                    oFilter.push(new Filter("CategoryID", FilterOperator.EQ, element)); 
+                });
+
+            }
+            
+            //En esta parte Se debe leer modelo local donde han almacenado los token
+            // if(values.selectedItem){
+            //     oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.selectedItem));
+            // }                     
+           
+            oBinding.filter(oFilter);
+            //this.onSearch(oFilter)
         },
 
         onSearch: async function(oFilter){
@@ -41,18 +69,33 @@ sap.ui.define([
 
         },
 
+        onSelectionChange: async function (oEvent) {
+
+            // let oFilter = [];
+            // let oSource = oEvent.getSource();
+            // let oTable = this.getView().byId("idProductsTable")
+            // let oBinding = oTable.getBinding("items");
+
+            // if(oSource.getSelectedKey()){
+            //     oFilter = new Filter("CategoryID", FilterOperator.EQ, oSource.getSelectedKey());               
+            // } 
+            // oBinding.filter(oFilter);               
+
+        },       
+
         onChange: async function (oEvent) {
-            let oFilter = [];
-            let oSource = oEvent.getSource();
-            let oTable = this.getView().byId("idProductsTable");
-            let oBinding = oTable.getBinding("items");
+            // let oFilter = [];
+            // let oSource = oEvent.getSource();
+            // let oTable = this.getView().byId("idProductsTable");
+            // let oBinding = oTable.getBinding("items");
 
-            if (oSource.getValue()) {
-                oFilter = new Filter("ProductName", FilterOperator.Contains, oSource.getValue());
-            }
+            // if (oSource.getValue()) {
+            //     oFilter = new Filter("ProductName", FilterOperator.Contains, oSource.getValue());
+            // }
 
-            oBinding.filter(oFilter);
+            // oBinding.filter(oFilter);
         }
+
 
     });
 });

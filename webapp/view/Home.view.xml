@@ -8,23 +8,94 @@
         id="page"
         title="{i18n>title}"
     >
-        <VBox
-            id="vbId01"
+        <HBox
             class="sapUiSmallMargin"
-        >
-            <Text
+        > 
+            <!-- <Text
                 id="txtId01"
                 text="{i18n>textPruebai18n}"
-            />
-            <Toolbar>
-                <Input value="{LocalModel>InputUser}" />
+            /> -->
+
+            <HBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label
+                        labelFor="idLabel1"
+                        text="{i18n>MaterialDescription}"
+                    />
+                    <Input
+                        id="idLabel1"
+                        value="{LocalDataModel>/valueInput}"
+                    />
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label
+                        labelFor="comboboxID"
+                        text="{i18n>Category}"
+                    />
+                    <ComboBox
+                        id="comboboxID"
+                        selectionChange=".onSelectionChange"
+                        selectedKey="{LocalDataModel>/selectedKey}"
+                        items="{
+					path: '/Categories',
+					sorter: { path: 'CategoryName' }
+				}"
+                    >
+                        <c:Item
+                            key="{CategoryID}"
+                            text="{CategoryID} - {CategoryName}"
+                        />
+                    </ComboBox>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label
+                        labelFor="comboboxID"
+                        text="{i18n>Categories}"
+                    />
+                    <MultiComboBox
+                        selectionChange="handleSelectionChange"
+                        selectionFinish="handleSelectionFinish"
+                        selectedKeys="{LocalDataModel>/selectedKeyMulti}"
+                        items="{
+                                path: '/Categories',
+                                sorter: { path: 'CategoryName' }
+                               }"
+                    >
+                        <c:Item
+                            key="{CategoryID}"
+                            text="{CategoryID} - {CategoryName}"
+                        />
+                    </MultiComboBox>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label
+                        labelFor="comboboxID"
+                        text="{i18n>Suppliers}"
+                    />
+                    <MultiInput
+                        id="multiInput4"
+                        showValueHelp="false"
+                        selectedKey="{LocalDataModel>/selectedItem}"
+                        tokenUpdate=""
+                        suggestionItems="{
+                                        path: '/Suppliers',
+                                        sorter: { path: 'CompanyName' }
+                                    }"
+                    >
+                        <c:Item
+                            key="{SupplierID}"
+                            text="{SupplierID} - {CompanyName}"
+                        />
+                    </MultiInput>
+                </VBox>
+            </HBox>
                 <Button
                     id="btnBuscar"
                     text="{i18n>textBuscar}"
                     press="onPress"
-                />
-            </Toolbar>
-        </VBox>
+                    class="sapUiSmallMarginTop"
+                />            
+        </HBox>
 
         <VBox
             id="vbId02"
